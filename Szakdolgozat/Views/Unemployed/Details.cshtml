@@ -1,0 +1,36 @@
+﻿@model Szakdolgozat.Models.UnemployedModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>UnemployedModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberofUnemployed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumberofUnemployed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaleUnemployed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaleUnemployed)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FemaleUnemployed)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FemaleUnemployed)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Date">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,59 @@
+﻿@model Szakdolgozat.Models.TourismModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>TourismModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Date" />
+            <div class="form-group">
+                <label asp-for="TripForeignGuest" class="control-label"></label>
+                <input asp-for="TripForeignGuest" class="form-control" />
+                <span asp-validation-for="TripForeignGuest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NightForeignGuest" class="control-label"></label>
+                <input asp-for="NightForeignGuest" class="form-control" />
+                <span asp-validation-for="NightForeignGuest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpendForeignGuest" class="control-label"></label>
+                <input asp-for="SpendForeignGuest" class="form-control" />
+                <span asp-validation-for="SpendForeignGuest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TripHungarianGuest" class="control-label"></label>
+                <input asp-for="TripHungarianGuest" class="form-control" />
+                <span asp-validation-for="TripHungarianGuest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NightHungarianGuest" class="control-label"></label>
+                <input asp-for="NightHungarianGuest" class="form-control" />
+                <span asp-validation-for="NightHungarianGuest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpendHungarianGuest" class="control-label"></label>
+                <input asp-for="SpendHungarianGuest" class="form-control" />
+                <span asp-validation-for="SpendHungarianGuest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,44 @@
+﻿@model Szakdolgozat.Models.UnemployedModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>UnemployedModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Date" />
+            <div class="form-group">
+                <label asp-for="NumberofUnemployed" class="control-label"></label>
+                <input asp-for="NumberofUnemployed" class="form-control" />
+                <span asp-validation-for="NumberofUnemployed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaleUnemployed" class="control-label"></label>
+                <input asp-for="MaleUnemployed" class="form-control" />
+                <span asp-validation-for="MaleUnemployed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FemaleUnemployed" class="control-label"></label>
+                <input asp-for="FemaleUnemployed" class="form-control" />
+                <span asp-validation-for="FemaleUnemployed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

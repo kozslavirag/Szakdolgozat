@@ -1,0 +1,54 @@
+﻿@model Szakdolgozat.Models.TourismModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>TourismModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TripForeignGuest)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TripForeignGuest)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NightForeignGuest)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NightForeignGuest)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SpendForeignGuest)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SpendForeignGuest)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TripHungarianGuest)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TripHungarianGuest)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NightHungarianGuest)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NightHungarianGuest)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SpendHungarianGuest)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SpendHungarianGuest)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Date">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

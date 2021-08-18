@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Szakdolgozat.Models.PriceModel>
+
+@{
+    ViewData["Title"] = "";
+}
+
+<h1>Egyes termékek fogyasztói átlagára, havonta</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StapleFoodPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PetrolPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GasOilPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StapleFoodPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PetrolPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GasOilPrice)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Date">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Date">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Date">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
