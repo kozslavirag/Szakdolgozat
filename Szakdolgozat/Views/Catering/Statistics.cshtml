@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Szakdolgozat.Models.CateringModel>
+
+@{
+
+}
+
+<h1 style="text-align:center">Statisztikai elemzés a vállalkozások forgalmáról</h1>
+
+
+<html>
+<head>
+    <script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	title: {
+		text: "Ice Cream Sales Over a Month"
+	},
+	axisX: {
+		valueFormatString: "DD MMM"
+	},
+	axisY: {
+		title: "Sales (in USD)",
+		prefix: "$"
+	},
+	data: [{
+		type: "spline",
+		xValueType: "dateTime",
+		xValueFormatString: "DD MMM",
+		yValueFormatString: "$#,###",
+		dataPoints: @Html.Raw(ViewBag.CateringModels)
+	}]
+});
+chart.render();
+
+}
+    </script>
+</head>
+<body>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
+
+<table class="table table-light table-striped">
+    <thead>
+        <tr>
+            <th style="text-align:center">Vendéglátás forgalma</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Átlag:
+            </td>
+            <td>
+                @ViewBag.avg
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Medián:
+            </td>
+            <td>
+                @ViewBag.median
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Módusz:
+            </td>
+            <td>
+                @ViewBag.modus
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Maximum:
+            </td>
+            <td>
+                @ViewBag.max
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Minimum:
+            </td>
+            <td>
+                @ViewBag.min
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Szórás:
+            </td>
+            <td>
+                @ViewBag.dev
+            </td>
+
+        </tr>
+    </tbody>
+</table>

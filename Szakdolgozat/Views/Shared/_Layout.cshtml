@@ -10,50 +10,69 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="btn-group dropright">
-                <button type="button" class="btn btn-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" asp-controller="Business" asp-action="Index">Kereskedelem</a>
-                    <a class="dropdown-item" asp-controller="Tourism" asp-action="Index">Turizmus</a>
-                    <a class="dropdown-item" asp-controller="Catering" asp-action="Index">Vendéglátás</a>
-                    <a class="dropdown-item" asp-controller="Employee" asp-action="Index">Foglalkoztatottak</a>
-                    <a class="dropdown-item" asp-controller="Unemployed" asp-action="Index">Munkanélküliség</a>
-                    <a class="dropdown-item" asp-controller="Industry" asp-action="Index">Ipar</a>
-                    <a class="dropdown-item" asp-controller="Price" asp-action="Index">Árak változása</a>
-                    <a class="dropdown-item" asp-controller="GDP" asp-action="Index">GDP</a>
-                    <div class="dropdown-divider"></div>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" style="height: 60px;">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" asp-area="" asp-controller="Home" asp-action="Index">Covid-19 Statisztika</a>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-white sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black" asp-controller="Business" asp-action="Index">
+                                <i class="fas fa-shopping-cart"></i>
+                                Kereskedelem
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black" asp-controller="Tourism" asp-action="Index">
+                                <i class="fa fa-plane"></i>
+                                Turizmus
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black" asp-controller="Catering" asp-action="Index">
+                                <i class="fas fa-cocktail"></i>
+                                Vendéglátás
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black" asp-controller="Employee" asp-action="Index">
+                                <i class="fa fa-user"></i>
+                                Munkaerőpiac
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black" asp-controller="Unemployed" asp-action="Index">
+                                <i class="fa fa-user-times"></i>
+                                Munkanélküliség
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black" asp-controller="Industry" asp-action="Index">
+                                <i class="fa fa-industry"></i>
+                                Ipar
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black" asp-controller="Price" asp-action="Index">
+                                <i class="fas fa-hand-holding-usd"></i>
+                                Árváltozás
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: black" asp-controller="GDP" asp-action="Index">
+                                <i class="fas fa-coins"></i>
+                                GDP
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-            @*<div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Szakdolgozat</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Business" asp-action="Index">Kereskedelem</a>
-                    </li>
-                </ul>
-            </div>
-        </div>*@
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">

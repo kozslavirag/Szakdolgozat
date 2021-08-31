@@ -9,6 +9,9 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<p>
+    <a style="float:left" asp-action="Statistics">Statisztika</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -34,6 +37,7 @@
                 <a asp-action="Edit" asp-route-id="@item.Date">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Date">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Date">Delete</a>
+                
             </td>
         </tr>
 }
