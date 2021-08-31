@@ -7,30 +7,31 @@
 <h1 style="text-align:center">Statisztikai elemzés a vállalkozások forgalmáról</h1>
 
 
+<!DOCTYPE HTML>
 <html>
 <head>
     <script>
 window.onload = function () {
 
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	title: {
-		text: "Ice Cream Sales Over a Month"
-	},
-	axisX: {
-		valueFormatString: "DD MMM"
-	},
-	axisY: {
-		title: "Sales (in USD)",
-		prefix: "$"
-	},
-	data: [{
-		type: "spline",
-		xValueType: "dateTime",
-		xValueFormatString: "DD MMM",
-		yValueFormatString: "$#,###",
-		dataPoints: @Html.Raw(ViewBag.CateringModels)
-	}]
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        title: {
+            text: ""
+        },
+        axisX: {
+            valueFormatString: "DD MM YYYY"
+        },
+        axisY: {
+            title: "Eladási forgalom",
+            prefix: "$"
+        },
+        data: [{
+            type: "spline",
+            xValueType: "dateTime",
+            xValueFormatString: "DD MM YYYY",
+            yValueFormatString: "$#,###",
+            cateringDataToChart: @Html.Raw(ViewBag.CateringModels) 
+	    }]
 });
 chart.render();
 

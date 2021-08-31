@@ -25,10 +25,12 @@ namespace Szakdolgozat.Models
         [Key]
         [Display(Name ="Dátum")]
         [DisplayFormat(DataFormatString = "{0:yyyy.MM.dd}")]
+        [DataMember(Name = "Date")]
         public DateTime Date { get; set; }
         [Required]
         [Display(Name ="Eladási forgalom (millió Ft)")]
         [DisplayFormat(DataFormatString = "{0:N0} Ft")]
+        [DataMember(Name = "SalesVolume")]
         public int SalesVolume { get; set; }
         
                 

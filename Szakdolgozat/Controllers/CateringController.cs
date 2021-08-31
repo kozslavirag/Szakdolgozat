@@ -8,6 +8,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Protocols;
 using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using Szakdolgozat.Context;
 using Szakdolgozat.Models;
 
@@ -16,7 +17,7 @@ namespace Szakdolgozat.Controllers
     public class CateringController : Controller
     {
         List<int> catering = new List<int>();
-        List<object> cateringDataToChart = new List<object>();
+        List<CateringModel> cateringDataToChart = new List<CateringModel>();
         private readonly DataContext _context;
 
         public CateringController(DataContext context)
@@ -38,8 +39,7 @@ namespace Szakdolgozat.Controllers
             var cateringModel = _context.Catering.ToList();
             foreach (var item in cateringModel)
             {
-                cateringDataToChart.Add(item.Date);
-                cateringDataToChart.Add(item.SalesVolume);
+                cateringDataToChart.Add(new CateringModel(item.Date, item.SalesVolume));
             }
         }
 
@@ -142,7 +142,7 @@ namespace Szakdolgozat.Controllers
 
         // GET: Catering/Create
 
-        public IActionResult Statistics()
+        public ActionResult Statistics()
         {
             ChartListUpload();
             ViewBag.CateringModels = JsonConvert.SerializeObject(cateringDataToChart);
