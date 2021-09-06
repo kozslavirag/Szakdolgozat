@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Szakdolgozat.Models.CateringModel>
+﻿@model IEnumerable<Szakdolgozat.Models.EmployeeModel>
 
 @{
 
 }
 
 
-<h1 style="text-align:center">Statisztikai elemzés a vállalkozások forgalmáról</h1>
+<h1 style="text-align:center">Statisztikai elemzés a 15-74 éves foglalkoztatottak számáról</h1>
 <br />
 
 
@@ -15,7 +15,8 @@
     <script>
         window.onload = function () {
 var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
+    animationEnabled: true,
+    theme: "light2",
 	title: {
 		text: ""
 	},
@@ -25,20 +26,22 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		/*interval: 10*/
 	},
 	axisY: {
-		title: "Eladási forgalom",
-		suffix: " HUF"
+		title: "Foglalkoztatottak száma",
+		suffix: " Fő"
 	},
     data: [{
-        color: "green",
-		type: "spline",
-		yValueFormatString: "#,###Ft",
-        dataPoints: @Html.Raw(ViewBag.CateringModels)
+        /*color: "green",*/
+		type: "column",
+		yValueFormatString: "#,###Fő",
+        dataPoints: @Html.Raw(ViewBag.EmployeeModels)
 	}]
 });
 chart.render();
 }
     </script>
 </head>
+@*<head>*@
+@*</head>*@
 <body>
     <div class="card bg-light mb-3" style="max-width: 80%">
         <div class="card-body">
@@ -55,7 +58,7 @@ chart.render();
 
     <div class="h-100 card" style="max-width:30%">
         <div class="card-header">
-            <h4 class="card-heading" style="text-align:center">A vendéglátóhelyek forgalma</h4>
+            <h4 class="card-heading" style="text-align:center">Foglalkoztatottak száma</h4>
         </div>
         <div class="card-body">
             <table class="table">
@@ -117,4 +120,50 @@ chart.render();
         </div>
     </div>
 </div>
+<div class="mb-4 mb-lg-0 col-lg-5">
+    <div class="h-50 pb-4 pb-lg-2">
+        <div class="h-100 card">
+            <div class="d-flex card-body">
+                <div class="w-100 align-items-center row">
+                    <script>
+                                window.onload = function () {
 
+                                    var chart = new CanvasJS.Chart("chartContainer", {
+	                                    animationEnabled: true,
+	                                    title: {
+		                                    text: "Percentage Market Share of Treatments in Alternative Medicine"
+	                                    },
+	                                    data: [{
+		                                    type: "doughnut",
+		                                    startAngle: 60,
+		                                    indexLabelFontSize: 16,
+		                                    indexLabel: "{label} - {y}%",
+		                                    toolTipContent: "<b>{label}:</b> {y}%",
+		                                    dataPoints: @Html.Raw(ViewBag.EmployeeGenderModels)
+	                                    }]
+                                    });
+                                    chart.render();
+
+                                }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--<div class="row">
+
+    <div class="h-100 card" style="max-width:30%">
+        <div class="card-header">
+            <h4 class="card-heading" style="text-align:center">Foglalkoztatottak száma</h4>
+        </div>
+        <div class="card-body">-->
+@*<head>*@
+
+@*</head>*@
+<!--</div>
+    </div>
+</div>-->

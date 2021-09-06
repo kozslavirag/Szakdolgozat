@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Szakdolgozat.Models.CateringModel>
+﻿@model IEnumerable<Szakdolgozat.Models.GDPModel>
 
 @{
 
 }
 
 
-<h1 style="text-align:center">Statisztikai elemzés a vállalkozások forgalmáról</h1>
+<h1 style="text-align:center">Statisztikai elemzés a bruttó hazai termék (GDP) termeléséről</h1>
 <br />
 
 
@@ -15,7 +15,8 @@
     <script>
         window.onload = function () {
 var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
+    animationEnabled: true,
+    theme: "light2",
 	title: {
 		text: ""
 	},
@@ -25,14 +26,14 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		/*interval: 10*/
 	},
 	axisY: {
-		title: "Eladási forgalom",
+		title: "GDP termelés",
 		suffix: " HUF"
 	},
     data: [{
-        color: "green",
-		type: "spline",
+        /*color: "green",*/
+		type: "column",
 		yValueFormatString: "#,###Ft",
-        dataPoints: @Html.Raw(ViewBag.CateringModels)
+        dataPoints: @Html.Raw(ViewBag.GDPModels)
 	}]
 });
 chart.render();
@@ -55,7 +56,7 @@ chart.render();
 
     <div class="h-100 card" style="max-width:30%">
         <div class="card-header">
-            <h4 class="card-heading" style="text-align:center">A vendéglátóhelyek forgalma</h4>
+            <h4 class="card-heading" style="text-align:center">A bruttó hazai termék (GDP) termelése</h4>
         </div>
         <div class="card-body">
             <table class="table">
@@ -117,4 +118,5 @@ chart.render();
         </div>
     </div>
 </div>
+
 

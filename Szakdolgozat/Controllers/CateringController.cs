@@ -36,10 +36,11 @@ namespace Szakdolgozat.Controllers
 
         public void ChartListUpload()
         {
+            int i = 1;
             var cateringModel = _context.Catering.ToList();
             foreach (var item in cateringModel)
             {
-                cateringDataToChart.Add(new CateringModel(item.Date, item.SalesVolume));
+                cateringDataToChart.Add(new CateringModel(i++, item.SalesVolume, item.Date.ToString("yyyy.MM.dd")));
             }
         }
 
