@@ -1,0 +1,189 @@
+﻿@model IEnumerable<Szakdolgozat.Models.TourismModel>
+
+@{
+
+}
+<h1 style="text-align:center">Statisztikai elemzés a turizmus alakulásáról</h1>
+<br />
+<br />
+
+<script>
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chart1", {
+	        animationEnabled: true,
+            theme: "light2",
+            title: {
+		        text: ""
+	        },
+            axisX: {
+            title: "Időszak",
+            titleFontFamily: "comic sans ms",
+		    /*interval: 10*/
+	        },
+	        axisY: {
+		    title: "Eladási forgalom",
+		    suffix: " HUF"
+	        },
+            data: [{
+                color: "red",
+                type: "spline",
+                yValueFormatString: "#,###Ft",
+                dataPoints: @Html.Raw(ViewBag.TourismForeignSpendModels)
+            },
+            {
+                color: "blue",
+                type: "spline",
+                yValueFormatString: "#,###Ft",
+                dataPoints: @Html.Raw(ViewBag.TourismHungarianSpendModels)
+	        }]
+        });
+        chart.render();
+
+        var chart = new CanvasJS.Chart("chart2", {
+            animationEnabled: true,
+            theme: "light2",
+	        title: {
+		        text: ""
+	        },
+            axisX: {
+                title: "Időszak",
+                titleFontFamily: "comic sans ms",
+		        /*interval: 10*/
+	        },
+	        axisY: {
+		        title: "Vendégéjszakák száma",
+		        suffix: " Fő"
+	        },
+            data: [{
+                /*color: "green",*/
+                type: "column",
+                yValueFormatString: "#,### Fő",
+                dataPoints: @Html.Raw(ViewBag.TourismForeignModels)
+            },
+            {
+                /*color: "green",*/
+		        type: "column",
+		        yValueFormatString: "#,### Fő",
+                dataPoints: @Html.Raw(ViewBag.TourismHungarianModels)
+	        }]
+        });
+        chart.render();
+        }
+</script>
+
+<body>
+    <div class="card bg-light mb-3" style="max-width: 80%">
+        <div class="card-body">
+            <div id="chart1" style="height: 370px; width: 100%;"></div>
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        </div>
+    </div>
+
+</body>
+
+<div class="row">
+
+    <div class="col-lg-5 col-sm-5" style="max-width:60%">
+        <div class="card-header">
+            <h4 class="card-heading" style="text-align:center">Külföldi vendégek költése</h4>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>
+                            Külföldi vendégek pénzköltése
+                        </th>
+                        <th>
+                            Belföldi vendégek pénzköltése
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Átlag:
+                        </td>
+                        <td>
+                            @ViewBag.avg
+                        </td>
+                        <td>
+                            @ViewBag.avgHu
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Medián:
+                        </td>
+                        <td>
+                            @ViewBag.median
+                        </td>
+                        <td>
+                            @ViewBag.medianHu
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Módusz:
+                        </td>
+                        <td>
+                            @ViewBag.modus
+                        </td>
+                        <td>
+                            @ViewBag.modusHu
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Maximum:
+                        </td>
+                        <td>
+                            @ViewBag.max
+                        </td>
+                        <td>
+                            @ViewBag.maxHu
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Minimum:
+                        </td>
+                        <td>
+                            @ViewBag.min
+                        </td>
+                        <td>
+                            @ViewBag.minHu
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Szórás:
+                        </td>
+                        <td>
+                            @ViewBag.dev
+                        </td>
+                        <td>
+                            @ViewBag.devHu
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-5 col-sm-5 mt-sm-0 mt-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="d-flex card-body">
+                        <div class="w-100 align-items-center row">
+                            <div id="chart2" style="height: 370px; width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

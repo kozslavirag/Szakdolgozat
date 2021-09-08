@@ -14,29 +14,29 @@
 <head>
     <script>
         window.onload = function () {
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	title: {
-		text: ""
-	},
-    axisX: {
-        title: "Időszak",
-        titleFontFamily: "comic sans ms",
-		/*interval: 10*/
-	},
-	axisY: {
-		title: "Eladási forgalom",
-		suffix: " HUF"
-	},
-    data: [{
-        color: "green",
-		type: "spline",
-		yValueFormatString: "#,###Ft",
-        dataPoints: @Html.Raw(ViewBag.CateringModels)
-	}]
-});
-chart.render();
-}
+            var chart = new CanvasJS.Chart("chartContainer", {
+	            animationEnabled: true,
+	            title: {
+		            text: ""
+	            },
+                axisX: {
+                    title: "Időszak",
+                    titleFontFamily: "comic sans ms",
+		            /*interval: 10*/
+	            },
+	            axisY: {
+		            title: "Eladási forgalom",
+		            suffix: " HUF"
+	            },
+                data: [{
+                    color: "green",
+		            type: "spline",
+		            yValueFormatString: "#,###Ft",
+                    dataPoints: @Html.Raw(ViewBag.CateringModels)
+	            }]
+            });
+            chart.render();
+        }
     </script>
 </head>
 <body>

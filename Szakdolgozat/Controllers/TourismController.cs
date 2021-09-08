@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Szakdolgozat.Context;
 using Szakdolgozat.Models;
 
@@ -12,11 +13,210 @@ namespace Szakdolgozat.Controllers
 {
     public class TourismController : Controller
     {
+        List<int> tourism = new List<int>();
+        List<int> tourismHu = new List<int>();
+        List<TourismModel> tourismForeignDataToChart = new List<TourismModel>();
+        List<TourismModel> tourismHungarianDataToChart = new List<TourismModel>();
+        List<TourismModel> tourismDataToChart = new List<TourismModel>();
+        List<TourismModel> tourismHuDataToChart = new List<TourismModel>();
+        List<EmployeeModel> tourismSpendDataToChart = new List<EmployeeModel>();
+        List<int> tourismForeign = new List<int>();
+        List<int> tourismHungarian = new List<int>();
         private readonly DataContext _context;
 
         public TourismController(DataContext context)
         {
             _context = context;
+        }
+
+        public void ListUpload()
+        {
+            var tourismModel = _context.Tourism.ToList();
+            foreach (var item in tourismModel)
+            {
+                tourism.Add(item.SpendForeignGuest);
+                tourismHu.Add(item.SpendHungarianGuest);
+            }
+        }
+
+        public void ChartListUpload()
+        {
+            int i = 1;
+            var tourismModel = _context.Tourism.ToList();
+            foreach (var item in tourismModel)
+            {
+                tourismForeignDataToChart.Add(new TourismModel(i++, item.SpendForeignGuest, item.Date.ToString("yyyy.MM.dd")));
+            }
+            int j = 1;
+            foreach (var item in tourismModel)
+            {
+                tourismHungarianDataToChart.Add(new TourismModel(j++, item.SpendHungarianGuest, item.Date.ToString("yyyy.MM.dd")));
+            }
+        }
+
+        public void PieChartListUpload()
+        {
+            int i = 1;
+            int j = 1;
+            var tourismModel = _context.Tourism.ToList();
+            foreach (var item in tourismModel)
+            {
+                tourismDataToChart.Add(new TourismModel (i++, item.NightForeignGuest, item.Date.ToString("yyyy.MM.dd")));
+                tourismHuDataToChart.Add(new TourismModel(j++, item.NightHungarianGuest, item.Date.ToString("yyyy.MM.dd")));
+            }
+            
+            //foreach (var item in tourismModel)
+            //{
+            //    tourismHungarianDataToChart.Add(new TourismModel(j++, item.NightHungarianGuest, item.Date.ToString("yyyy.MM.dd")));
+            //}
+            //tourismSpendDataToChart.Add(new EmployeeModel("Külföldi vendégéjszakák száma", tourismForeign.Sum()));
+            //tourismSpendDataToChart.Add(new EmployeeModel("Belföldi vendégéjszakák száma", tourismHu.Sum()));
+        }
+
+        public double Avg()
+        {
+
+            double avg = tourism.Average();
+            return avg;
+        }
+
+        public double AvgHu()
+        {
+
+            double avg = tourismHu.Average();
+            return avg;
+        }
+
+        public int Median()
+        {
+            int salesCount = tourism.Count();
+            int halfIndex = tourism.Count() / 2;
+            var sortedNumbers = tourism.OrderBy(n => n);
+            int median;
+            if ((salesCount % 2) == 0)
+            {
+                median = ((sortedNumbers.ElementAt(halfIndex) +
+                    sortedNumbers.ElementAt((halfIndex - 1))) / 2);
+
+            }
+            else
+            {
+                median = sortedNumbers.ElementAt(halfIndex);
+            }
+
+            return median;
+
+        }
+
+        public int MedianHu()
+        {
+            int salesCount = tourismHu.Count();
+            int halfIndex = tourismHu.Count() / 2;
+            var sortedNumbers = tourismHu.OrderBy(n => n);
+            int median;
+            if ((salesCount % 2) == 0)
+            {
+                median = ((sortedNumbers.ElementAt(halfIndex) +
+                    sortedNumbers.ElementAt((halfIndex - 1))) / 2);
+
+            }
+            else
+            {
+                median = sortedNumbers.ElementAt(halfIndex);
+            }
+
+            return median;
+
+        }
+
+        public int Modus()
+        {
+            int mode = 0;
+
+            var groupResult = tourism.GroupBy(n => n).ToList();
+
+            if (groupResult.Count != tourism.Count)
+            {
+                mode = tourism.GroupBy(n => n).
+                      OrderByDescending(g => g.Count()).
+                      Select(g => g.Key).FirstOrDefault();
+            }
+            else
+            {
+            }
+            return mode;
+        }
+
+        public int ModusHu()
+        {
+            int mode = 0;
+
+            var groupResult = tourismHu.GroupBy(n => n).ToList();
+
+            if (groupResult.Count != tourismHu.Count)
+            {
+                mode = tourismHu.GroupBy(n => n).
+                      OrderByDescending(g => g.Count()).
+                      Select(g => g.Key).FirstOrDefault();
+            }
+            else
+            {
+            }
+            return mode;
+        }
+
+        public int Max()
+        {
+            int max = tourism.Max();
+            return max;
+        }
+
+        public int MaxHu()
+        {
+            int max = tourismHu.Max();
+            return max;
+        }
+
+        public int Min()
+        {
+            int min = tourism.Min();
+            return min;
+        }
+
+        public int MinHu()
+        {
+            int min = tourismHu.Min();
+            return min;
+        }
+
+        public double Deviation()
+        {
+            double avg = Avg();
+            List<double> differences = new List<double>();
+            foreach (var item in tourism)
+            {
+                double difference = Math.Pow(item - avg, 2);
+                differences.Add(difference);
+            }
+            double differenceSum = differences.Sum();
+            double deviation = Math.Sqrt(differenceSum / tourism.Count());
+
+            return deviation;
+        }
+
+        public double DeviationHu()
+        {
+            double avg = AvgHu();
+            List<double> differences = new List<double>();
+            foreach (var item in tourismHu)
+            {
+                double difference = Math.Pow(item - avg, 2);
+                differences.Add(difference);
+            }
+            double differenceSum = differences.Sum();
+            double deviation = Math.Sqrt(differenceSum / tourismHu.Count());
+
+            return deviation;
         }
 
         // GET: Tourism
@@ -41,6 +241,31 @@ namespace Szakdolgozat.Controllers
             }
 
             return View(tourismModel);
+        }
+
+        public ActionResult Statistics()
+        {
+            ChartListUpload();
+            ViewBag.TourismForeignSpendModels = JsonConvert.SerializeObject(tourismForeignDataToChart);
+            ViewBag.TourismHungarianSpendModels = JsonConvert.SerializeObject(tourismHungarianDataToChart);
+            PieChartListUpload();
+            //ViewBag.TourismSpendModels = JsonConvert.SerializeObject(tourismSpendDataToChart);
+            ViewBag.TourismForeignModels = JsonConvert.SerializeObject(tourismDataToChart);
+            ViewBag.TourismHungarianModels = JsonConvert.SerializeObject(tourismHuDataToChart);
+            ListUpload();
+            ViewBag.avg = Avg();
+            ViewBag.avgHu = AvgHu();
+            ViewBag.median = Median();
+            ViewBag.medianHu = MedianHu();
+            ViewBag.modus = Modus();
+            ViewBag.modusHu = ModusHu();
+            ViewBag.max = Max();
+            ViewBag.maxHu = MaxHu();
+            ViewBag.min = Min();
+            ViewBag.minHu = MinHu();
+            ViewBag.dev = Deviation();
+            ViewBag.devHu = DeviationHu();
+            return View();
         }
 
         // GET: Tourism/Create
