@@ -70,7 +70,7 @@
         chart.render();
         }
 </script>
-
+<a asp-action="Index">Adatok megtekintése</a>
 <body>
     <div class="card bg-light mb-3" style="max-width: 80%">
         <div class="card-body">
@@ -81,109 +81,121 @@
 
 </body>
 
-<div class="row">
 
-    <div class="col-lg-5 col-sm-5" style="max-width:60%">
-        <div class="card-header">
-            <h4 class="card-heading" style="text-align:center">Külföldi vendégek költése</h4>
-        </div>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>
-                            Külföldi vendégek pénzköltése
-                        </th>
-                        <th>
-                            Belföldi vendégek pénzköltése
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            Átlag:
-                        </td>
-                        <td>
-                            @ViewBag.avg
-                        </td>
-                        <td>
-                            @ViewBag.avgHu
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Medián:
-                        </td>
-                        <td>
-                            @ViewBag.median
-                        </td>
-                        <td>
-                            @ViewBag.medianHu
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Módusz:
-                        </td>
-                        <td>
-                            @ViewBag.modus
-                        </td>
-                        <td>
-                            @ViewBag.modusHu
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Maximum:
-                        </td>
-                        <td>
-                            @ViewBag.max
-                        </td>
-                        <td>
-                            @ViewBag.maxHu
-                        </td>
+<table>
+    <tr>
+        <td>
+            @*<div class="row">*@
 
-                    </tr>
-                    <tr>
-                        <td>
-                            Minimum:
-                        </td>
-                        <td>
-                            @ViewBag.min
-                        </td>
-                        <td>
-                            @ViewBag.minHu
-                        </td>
+                <div class="h-100 card" @*style="max-width:30%"*@>
+                    <div class="card-header">
+                        <h4 class="card-heading" style="text-align:center">A vendéglátóhelyek forgalma</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>
+                                        Külföldi vendégek pénzköltése
+                                    </th>
+                                    <th>
+                                        Belföldi vendégek pénzköltése
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Átlag:
+                                    </td>
+                                    <td>
+                                        @ViewBag.avg
+                                    </td>
+                                    <td>
+                                        @ViewBag.avgHu
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Medián:
+                                    </td>
+                                    <td>
+                                        @ViewBag.median
+                                    </td>
+                                    <td>
+                                        @ViewBag.medianHu
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Módusz:
+                                    </td>
+                                    <td>
+                                        @ViewBag.modus
+                                    </td>
+                                    <td>
+                                        @ViewBag.modusHu
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Maximum:
+                                    </td>
+                                    <td>
+                                        @ViewBag.max
+                                    </td>
+                                    <td>
+                                        @ViewBag.maxHu
+                                    </td>
 
-                    </tr>
-                    <tr>
-                        <td>
-                            Szórás:
-                        </td>
-                        <td>
-                            @ViewBag.dev
-                        </td>
-                        <td>
-                            @ViewBag.devHu
-                        </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Minimum:
+                                    </td>
+                                    <td>
+                                        @ViewBag.min
+                                    </td>
+                                    <td>
+                                        @ViewBag.minHu
+                                    </td>
 
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="col-lg-5 col-sm-5 mt-sm-0 mt-4">
-            <div class="card mb-4">
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Szórás:
+                                    </td>
+                                    <td>
+                                        @ViewBag.dev
+                                    </td>
+                                    <td>
+                                        @ViewBag.devHu
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @*</div>*@
+        </td>
+        <td>
+            <div class="h-100 card" @*style="max-width:30%"*@>
+                <div class="card-header">
+                    <h4 class="card-heading" style="text-align:center">A vendéglátóhelyek forgalma</h4>
+                </div>
                 <div class="card-body">
                     <div class="d-flex card-body">
                         <div class="w-100 align-items-center row">
-                            <div id="chart2" style="height: 370px; width: 100%;"></div>
+                            <div id="chart2" style="height: 320px; width: 120%;"></div>
                         </div>
                     </div>
                 </div>
             </div>
-    </div>
-</div>
+            @*</div>*@
+        </td>
+    </tr>
+</table>
+

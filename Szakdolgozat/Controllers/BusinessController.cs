@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Szakdolgozat.Context;
 using Szakdolgozat.Models;
 
@@ -12,11 +13,106 @@ namespace Szakdolgozat.Controllers
 {
     public class BusinessController : Controller
     {
+        List<int> business = new List<int>();
+        List<BusinessModel> businessDataToChart = new List<BusinessModel>();
+
         private readonly DataContext _context;
 
         public BusinessController(DataContext context)
         {
             _context = context;
+        }
+
+        public void ListUploadOnline()
+        {
+            var businessModel = _context.Business.ToList();
+            foreach (var item in businessModel)
+            {
+                business.Add(item.OnlineBusiness);
+            }
+        }
+
+        public void ChartListUploadOnline()
+        {
+            int i = 1;
+            var businessModel = _context.Business.ToList();
+            foreach (var item in businessModel)
+            {
+                businessDataToChart.Add(new BusinessModel(i++, item.OnlineBusiness, item.Date.ToString("yyyy.MM.dd")));
+            }
+        }
+
+        public double AvgOnline()
+        {
+
+            double avg = business.Average();
+            return avg;
+        }
+
+        public int MedianOnline()
+        {
+            int salesCount = business.Count();
+            int halfIndex = business.Count() / 2;
+            var sortedNumbers = business.OrderBy(n => n);
+            int median;
+            if ((salesCount % 2) == 0)
+            {
+                median = ((sortedNumbers.ElementAt(halfIndex) +
+                    sortedNumbers.ElementAt((halfIndex - 1))) / 2);
+
+            }
+            else
+            {
+                median = sortedNumbers.ElementAt(halfIndex);
+            }
+
+            return median;
+
+        }
+
+        public int ModusOnline()
+        {
+            int mode = 0;
+
+            var groupResult = business.GroupBy(n => n).ToList();
+
+            if (groupResult.Count != business.Count)
+            {
+                mode = business.GroupBy(n => n).
+                      OrderByDescending(g => g.Count()).
+                      Select(g => g.Key).FirstOrDefault();
+            }
+            else
+            {
+            }
+            return mode;
+        }
+
+        public int MaxOnline()
+        {
+            int max = business.Max();
+            return max;
+        }
+
+        public int MinOnline()
+        {
+            int min = business.Min();
+            return min;
+        }
+
+        public double DeviationOnline()
+        {
+            double avg = AvgOnline();
+            List<double> differences = new List<double>();
+            foreach (var item in business)
+            {
+                double difference = Math.Pow(item - avg, 2);
+                differences.Add(difference);
+            }
+            double differenceSum = differences.Sum();
+            double deviation = Math.Sqrt(differenceSum / business.Count());
+
+            return deviation;
         }
 
         // GET: Business
@@ -41,6 +137,20 @@ namespace Szakdolgozat.Controllers
             }
 
             return View(businessModel);
+        }
+
+        public ActionResult Statistics()
+        {
+            ChartListUploadOnline();
+            ViewBag.CateringModels = JsonConvert.SerializeObject(businessDataToChart);
+            ListUploadOnline();
+            ViewBag.avg = AvgOnline();
+            ViewBag.median = MedianOnline();
+            ViewBag.modus = ModusOnline();
+            ViewBag.max = MaxOnline();
+            ViewBag.min = MinOnline();
+            ViewBag.dev = DeviationOnline();
+            return View();
         }
 
         // GET: Business/Create
