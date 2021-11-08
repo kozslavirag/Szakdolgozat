@@ -18,21 +18,24 @@
             axisX: {
             title: "Időszak",
             titleFontFamily: "comic sans ms",
-		    /*interval: 10*/
 	        },
 	        axisY: {
-		    title: "Eladási forgalom",
+		    title: "Elköltött pénzösszeg",
 		    suffix: " HUF"
 	        },
             data: [{
                 color: "red",
                 type: "spline",
+                name: "Külföldi vendégek",
+                showInLegend: true,
                 yValueFormatString: "#,###Ft",
                 dataPoints: @Html.Raw(ViewBag.TourismForeignSpendModels)
             },
             {
                 color: "blue",
                 type: "spline",
+                name: "Belföldi vendégek",
+                showInLegend: true,
                 yValueFormatString: "#,###Ft",
                 dataPoints: @Html.Raw(ViewBag.TourismHungarianSpendModels)
 	        }]
@@ -57,12 +60,16 @@
             data: [{
                 /*color: "green",*/
                 type: "column",
+                name: "Külföldi vendégek",
+                showInLegend: true,
                 yValueFormatString: "#,### Fő",
                 dataPoints: @Html.Raw(ViewBag.TourismForeignModels)
             },
             {
                 /*color: "green",*/
-		        type: "column",
+                type: "column",
+                name: "Belföldi vendégek",
+                showInLegend: true,
 		        yValueFormatString: "#,### Fő",
                 dataPoints: @Html.Raw(ViewBag.TourismHungarianModels)
 	        }]
@@ -73,6 +80,9 @@
 <a asp-action="Index">Adatok megtekintése</a>
 <body>
     <div class="card bg-light mb-3" style="max-width: 80%">
+        <div class="card-header">
+            <h4 class="card-heading" style="text-align:center">Turisták pénzköltési szokásainak változása</h4>
+        </div>
         <div class="card-body">
             <div id="chart1" style="height: 370px; width: 100%;"></div>
             <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -89,7 +99,7 @@
 
                 <div class="h-100 card" @*style="max-width:30%"*@>
                     <div class="card-header">
-                        <h4 class="card-heading" style="text-align:center">A vendéglátóhelyek forgalma</h4>
+                        <h4 class="card-heading" style="text-align:center">A turisták pénzköltési szokásai</h4>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -111,10 +121,10 @@
                                         Átlag:
                                     </td>
                                     <td>
-                                        @ViewBag.avg
+                                        @((ViewBag.avg).ToString("C2"))
                                     </td>
                                     <td>
-                                        @ViewBag.avgHu
+                                        @((ViewBag.avgHu).ToString("C2"))
                                     </td>
                                 </tr>
                                 <tr>
@@ -122,10 +132,10 @@
                                         Medián:
                                     </td>
                                     <td>
-                                        @ViewBag.median
+                                        @((ViewBag.median).ToString("C2"))
                                     </td>
                                     <td>
-                                        @ViewBag.medianHu
+                                        @((ViewBag.medianHu).ToString("C2"))
                                     </td>
                                 </tr>
                                 <tr>
@@ -133,10 +143,10 @@
                                         Módusz:
                                     </td>
                                     <td>
-                                        @ViewBag.modus
+                                        @((ViewBag.modus).ToString("C2"))
                                     </td>
                                     <td>
-                                        @ViewBag.modusHu
+                                        @((ViewBag.modusHu).ToString("C2"))
                                     </td>
                                 </tr>
                                 <tr>
@@ -144,10 +154,10 @@
                                         Maximum:
                                     </td>
                                     <td>
-                                        @ViewBag.max
+                                        @((ViewBag.max).ToString("C2"))
                                     </td>
                                     <td>
-                                        @ViewBag.maxHu
+                                        @((ViewBag.maxHu).ToString("C2"))
                                     </td>
 
                                 </tr>
@@ -156,10 +166,10 @@
                                         Minimum:
                                     </td>
                                     <td>
-                                        @ViewBag.min
+                                        @((ViewBag.min).ToString("C2"))
                                     </td>
                                     <td>
-                                        @ViewBag.minHu
+                                        @((ViewBag.minHu).ToString("C2"))
                                     </td>
 
                                 </tr>
@@ -168,10 +178,10 @@
                                         Szórás:
                                     </td>
                                     <td>
-                                        @ViewBag.dev
+                                        @((ViewBag.dev).ToString("C2"))
                                     </td>
                                     <td>
-                                        @ViewBag.devHu
+                                        @((ViewBag.devHu).ToString("C2"))
                                     </td>
 
                                 </tr>
@@ -182,7 +192,7 @@
             @*</div>*@
         </td>
         <td>
-            <div class="h-100 card" @*style="max-width:30%"*@>
+            <div class="h-100 card" >
                 <div class="card-header">
                     <h4 class="card-heading" style="text-align:center">A vendéglátóhelyek forgalma</h4>
                 </div>

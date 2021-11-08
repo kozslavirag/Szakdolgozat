@@ -1,12 +1,12 @@
 ﻿@model Szakdolgozat.Models.TourismModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Új adat hozzáadása";
 }
 
-<h1>Create</h1>
+<h1>Új adat hozzáadása</h1>
 
-<h4>TourismModel</h4>
+<h4>Turizmus</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -48,14 +48,14 @@
                 <span asp-validation-for="SpendHungarianGuest" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Hozzáadás" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Vissza a listához</a>
 </div>
 
 @section Scripts {

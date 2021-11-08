@@ -199,7 +199,7 @@ namespace Szakdolgozat.Controllers
                 differences.Add(difference);
             }
             double differenceSum = differences.Sum();
-            double deviation = Math.Sqrt(differenceSum / tourism.Count());
+            double deviation = Math.Sqrt(differenceSum / (tourism.Count()-1));
 
             return deviation;
         }
@@ -207,14 +207,14 @@ namespace Szakdolgozat.Controllers
         public double DeviationHu()
         {
             double avg = AvgHu();
-            List<double> differences = new List<double>();
+            List<double> differencesHu = new List<double>();
             foreach (var item in tourismHu)
             {
-                double difference = Math.Pow(item - avg, 2);
-                differences.Add(difference);
+                double differenceHu = Math.Pow(item - avg, 2);
+                differencesHu.Add(differenceHu);
             }
-            double differenceSum = differences.Sum();
-            double deviation = Math.Sqrt(differenceSum / tourismHu.Count());
+            double differenceSum = differencesHu.Sum();
+            double deviation = Math.Sqrt(differenceSum / (tourismHu.Count()-1));
 
             return deviation;
         }
