@@ -6,9 +6,25 @@
 
 <h1>A Magyarországra tett külföldi és belföldi utazások főbb mutatói</h1>
 
+
 <p>
     <a asp-action="Create">Új adat hozzáadása</a>
 </p>
+
+<form method="get" action="@Url.Action("Index", "Tourism")">
+    <label class="form-label" for="searchByDate">Keresés dátum alapján</label>
+    <div class="input-group mb-3">
+        <input type="date" class="form-control" name="searchByDate" id="searchByDate">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+</form>
+
+
+
 <table class="table" style="background-color:white">
     <thead>
         <tr>
@@ -37,35 +53,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripForeignGuest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NightForeignGuest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpendForeignGuest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripHungarianGuest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NightHungarianGuest)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SpendHungarianGuest)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Date">Szerkesztés</a> |
-                <a asp-action="Details" asp-route-id="@item.Date">Részletek</a> |
-                <a asp-action="Delete" asp-route-id="@item.Date">Törlés</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TripForeignGuest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NightForeignGuest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpendForeignGuest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TripHungarianGuest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NightHungarianGuest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpendHungarianGuest)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Date">Szerkesztés</a> |
+                    <a asp-action="Details" asp-route-id="@item.Date">Részletek</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Date">Törlés</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

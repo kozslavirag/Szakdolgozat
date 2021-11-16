@@ -220,9 +220,18 @@ namespace Szakdolgozat.Controllers
         }
 
         // GET: Tourism
-        public async Task<IActionResult> Index()
+        public IActionResult Index(DateTime searchByDate)
         {
-            return View(await _context.Tourism.ToListAsync());
+            if (searchByDate != default)
+            {
+                return View(_context.Tourism.Where(x => x.Date == searchByDate).ToList());
+            }
+            else
+            {
+                return View(_context.Tourism.ToList());
+            }
+
+            //return View(tourismModels);
         }
 
         // GET: Tourism/Details/5
